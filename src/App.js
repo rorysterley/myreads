@@ -1,24 +1,21 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
 import './App.css'
+import { BrowserRouter, Route } from 'react-router-dom'
 import MyReads from './components/MyReads'
 import SearchBooks from './components/SearchBooks'
 
 class BooksApp extends React.Component {
-  state = {
-    showSearchPage: false
-  }
-  
   render() {
     return (
-      <div className="app">
-          {
-            // <SearchBooks />
-          }
-          <MyReads />
-      </div>
+      <BrowserRouter>
+        <div className="app">
+          <Route exact path='/' component={MyReads} />  
+          <Route path='/search' component={SearchBooks} />
+        </div>
+      </BrowserRouter>
     )
   }
+  
 }
 
 export default BooksApp

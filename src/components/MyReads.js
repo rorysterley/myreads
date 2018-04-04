@@ -27,7 +27,6 @@ class MyReads extends Component {
         })
         
         this.setState(bookShelves)
-        console.log('state in MyReads.js Line: 30', this.state)
       })
   }
 

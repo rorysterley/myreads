@@ -18,7 +18,7 @@ class MyReads extends Component {
           wantToRead: [],
           read: []
         }
-        
+        console.log('MyReads.js Line:21', books)
         books.map(book => {
           bookShelves[book.shelf].push(book)
           

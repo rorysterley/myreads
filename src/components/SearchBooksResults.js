@@ -5,13 +5,14 @@ class SearchBooksResults extends Component {
   render() {
     return (
       <div className="search-books-results">
-        <ol className="books-grid">        
+        <ol className="books-grid"> 
           {this.props.books.map(book => 
             <li key={book.id}>
               <Book
                 title={book.title ? book.title : 'No title given'}
                 authors={book.authors ? book.authors : 'No author given'}
                 imageURL={book.imageLinks ? book.imageLinks.thumbnail : ''}
+                shelf={book.shelf ? book.shelf : 'none'}
               />
             </li>
           )}    
@@ -22,3 +23,5 @@ class SearchBooksResults extends Component {
 }
 
 export default SearchBooksResults
+
+// shelf={book.shelf ? book.shelf : 'none'}

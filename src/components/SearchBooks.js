@@ -9,9 +9,7 @@ class SearchBooks extends Component {
     query: '',
     books: []
   }
-  
-  
-  
+
   search = event => {
     this.setState({query: event.target.value})
     

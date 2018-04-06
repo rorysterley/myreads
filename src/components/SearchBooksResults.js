@@ -9,6 +9,7 @@ class SearchBooksResults extends Component {
           {this.props.books.map(book => 
             <li key={book.id}>
               <Book
+                id={book.id ? book.id : 'No id given'}
                 title={book.title ? book.title : 'No title given'}
                 authors={book.authors ? book.authors : 'No author given'}
                 imageURL={book.imageLinks ? book.imageLinks.thumbnail : ''}
@@ -23,5 +24,3 @@ class SearchBooksResults extends Component {
 }
 
 export default SearchBooksResults
-
-// shelf={book.shelf ? book.shelf : 'none'}

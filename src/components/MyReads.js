@@ -10,7 +10,7 @@ class MyReads extends Component {
     read: []
   }
 
-  updateShelves() {
+  updateShelves = () => {
     BooksAPI.getAll()
       .then((books) => {
         var bookShelves = {
@@ -18,14 +18,14 @@ class MyReads extends Component {
           wantToRead: [],
           read: []
         }
-        console.log('MyReads.js Line:21', books)
+
         books.map(book => {
           bookShelves[book.shelf].push(book)
           
           // return false to clear no return warrning
           return false
         })
-        
+
         this.setState(bookShelves)
       })
   }
@@ -40,9 +40,9 @@ class MyReads extends Component {
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
-        <BookShelf shelfTitle='Currently Reading' shelf={this.state.currentlyReading} />
-        <BookShelf shelfTitle='Want to Read' shelf={this.state.wantToRead}/>
-        <BookShelf shelfTitle='Read' shelf={this.state.read}/>
+        <BookShelf shelfTitle='Currently Reading' shelf={this.state.currentlyReading} callback={this.updateShelves} />
+        <BookShelf shelfTitle='Want to Read' shelf={this.state.wantToRead} callback={this.updateShelves} />
+        <BookShelf shelfTitle='Read' shelf={this.state.read} callback={this.updateShelves} />
         <OpenSearch />
       </div>
     )

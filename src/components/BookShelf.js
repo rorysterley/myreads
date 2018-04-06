@@ -18,6 +18,7 @@ class BookShelf extends Component {
                       authors={book.authors ? book.authors : 'No author given'}
                       imageURL={book.imageLinks ? book.imageLinks.thumbnail : ''}
                       shelf={book.shelf ? book.shelf : 'none'}
+                      callback={this.props.callback}
                     />
                   </li>
                 )}

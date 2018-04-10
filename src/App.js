@@ -36,40 +36,23 @@ class BooksApp extends React.Component {
   }
   
   search = event => {
-      this.setState({query: event.target.value})
-  
-      // Prevent empty search error
-      if (event.target.value === '') {
-        this.setState({books: []})
-  
-        return
-      }
-  
-      BooksAPI.search(event.target.value)
-        .then(books => {
-          // Prevent non-matching search error
-          let searchBooks = books.error ? [] : books.slice(0)
-  
-          if (this.state.books.length === 0) {
-            BooksAPI.getAll()
-              .then(myBooks => {
-                for (let i = 0; i < myBooks.length; i++) {
-                  for (let j = 0; j < searchBooks.length; j++) {
-                    if (searchBooks[j].id === myBooks[i].id) {
-                      searchBooks[j].shelf = myBooks[i].shelf
-                    }
-    
-                    if (!searchBooks[j].shelf) {
-                      searchBooks[j].shelf = 'none'
-                    }
-                  }
-                }
-    
-                this.setState({books: searchBooks, getAllBooks: myBooks})
-              })
-            } else {
-              let myBooks = this.state.getAllBooks
-              
+    this.setState({query: event.target.value})
+
+    // Prevent empty search error
+    if (event.target.value === '') {
+      this.setState({books: []})
+
+      return
+    }
+
+    BooksAPI.search(event.target.value)
+      .then(books => {
+        // Prevent non-matching search error
+        let searchBooks = books.error ? [] : books.slice(0)
+
+        if (this.state.books.length === 0) {
+          BooksAPI.getAll()
+            .then(myBooks => {
               for (let i = 0; i < myBooks.length; i++) {
                 for (let j = 0; j < searchBooks.length; j++) {
                   if (searchBooks[j].id === myBooks[i].id) {
@@ -82,44 +65,27 @@ class BooksApp extends React.Component {
                 }
               }
   
-              this.setState({books: searchBooks})
-            }    
-        })
-    }
-  
-    // search = event => {
-    //     this.setState({query: event.target.value})
-    // 
-    //     // Prevent empty search error
-    //     if (event.target.value === '') {
-    //       this.setState({books: []})
-    // 
-    //       return
-    //     }
-    // 
-    //     BooksAPI.search(event.target.value)
-    //       .then(books => {
-    //         // Prevent non-matching search error
-    //         let searchBooks = books.error ? [] : books.slice(0)
-    // 
-    //         BooksAPI.getAll()
-    //           .then(myBooks => {
-    //             for (let i = 0; i < myBooks.length; i++) {
-    //               for (let j = 0; j < searchBooks.length; j++) {
-    //                 if (searchBooks[j].id === myBooks[i].id) {
-    //                   searchBooks[j].shelf = myBooks[i].shelf
-    //                 }
-    // 
-    //                 if (!searchBooks[j].shelf) {
-    //                   searchBooks[j].shelf = 'none'
-    //                 }
-    //               }
-    //             }
-    // 
-    //             this.setState({books: searchBooks})
-    //           })          
-    //       })
-    //   }
+              this.setState({books: searchBooks, getAllBooks: myBooks})
+            })
+          } else {
+            let myBooks = this.state.getAllBooks
+            
+            for (let i = 0; i < myBooks.length; i++) {
+              for (let j = 0; j < searchBooks.length; j++) {
+                if (searchBooks[j].id === myBooks[i].id) {
+                  searchBooks[j].shelf = myBooks[i].shelf
+                }
+
+                if (!searchBooks[j].shelf) {
+                  searchBooks[j].shelf = 'none'
+                }
+              }
+            }
+
+            this.setState({books: searchBooks})
+          }    
+      })
+  }
   
   clearSearch = () => { this.setState({books: [], query: ''}) }
   rerender = () => { this.forceUpdate() }
